@@ -22,9 +22,7 @@ public class Expense extends BaseModel {
     @Enumerated(EnumType.STRING)
     private Currency currency;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Group group;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "expense")
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "split_expense_id")
     private List<UserExpense> userExpenses;
 }

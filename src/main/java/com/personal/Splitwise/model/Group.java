@@ -3,10 +3,7 @@ package com.personal.Splitwise.model;
 import com.personal.Splitwise.model.constant.BaseModel;
 import com.personal.Splitwise.model.constant.Currency;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -14,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 @Entity(name = "split_group")
 public class Group extends BaseModel {
     private String name;
@@ -23,9 +21,10 @@ public class Group extends BaseModel {
     @Enumerated(EnumType.STRING)
     private Currency defaultCurrency;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "split_group_id")
     private List<Expense> expenses;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "groups")
+    @ManyToMany
     private List<User> users;
 }

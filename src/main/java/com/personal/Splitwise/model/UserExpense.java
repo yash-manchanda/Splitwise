@@ -14,13 +14,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity(name = "split_user_expense")
 public class UserExpense extends BaseModel {
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private User user;
 
     private double amount;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Expense expense;
 
     @Enumerated(EnumType.STRING)
     private UserExpenseType userExpenseType;

@@ -3,11 +3,9 @@ package com.personal.Splitwise.model;
 import com.personal.Splitwise.model.constant.BaseModel;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToMany;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -15,11 +13,12 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Entity(name = "split_user")
 public class User extends BaseModel {
     private String name;
     private String email;
     private String phoneNumber;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
     private List<Group> groups;
 }
